@@ -1,5 +1,4 @@
-# Interview
-  web interview(vue)
+# web interview(vue)
 
 # ES6
   1.新增了块级作用域(let,const)：
@@ -26,6 +25,7 @@
   8.新增了模块化(import/export)
   
   9.新增了Set和Map数据结构
+
 
 # JS
   call，apply，bind：
@@ -114,6 +114,7 @@
              3.很多的移动设备（PDA 手机）无法完全显示框架，设备兼容性差
              4.增加服务器的http请求
 
+
 # Vue
   UTC时间格式转标准时间：安装moment.js
   
@@ -143,10 +144,13 @@
    
    父子传值：vuex，$emit
    
+   
 # Vuex（Vue状态管理）
   核心：仓库store，包含着你的应用中大部分的状态 (state)。
+  
   与全局对象不同：1.Vuex的存储状态是响应式的
                2.不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地提交 (commit) mutation
+               
   Vuex 使用单一状态树，从 store 实例中读取状态最简单的方法就是在计算属性中返回某个状态
   1.State
   2.Getter: 可以认为是 store 的计算属性
@@ -154,9 +158,12 @@
   4.Action: 类似于 mutation，但Action 提交的是 mutation，而不是直接变更状态；可以包含任意异步操作。异步逻辑都应该封装到 action 里面
   5.Module: 将 store 分割成模块（module）防止臃肿。每个模块拥有自己的 state、mutation、action、getter
   
+  
 # Vue React 对比
   都使用'Virtual DOM'（虚拟DOM，是一个映射真实DOM的JS对象，当有变化产生时，一个新的VD会被创建并计算与旧的的差别，然后将差别应用在真实DOM上），React是JSX（JSX是使用xml语法编写javascript的一种语法糖），Vue是模板语法。
+  
   mvvm即是model-view-viewmodel，model和view之间的衔接交互都是通过viewmodel来实现的。viewmodel就是创建一个vue实例，vue实例是作用于某一个dom元素上的。
+  
   都是单项数据流，但是都可以进行 双向数据绑定
   提供了响应式和组件化的视图组件，都有脚手架（vuex，vue-router|react-router,react-redux），都有构建工具（vue-cli,Create React App (CRA))
   Vue：在渲染过程中，会跟踪每一个组件的依赖关系，不需要重新渲染整个组件树。
@@ -165,8 +172,11 @@
   
 # CSS
   盒模型：box-sizing: border-box（整个div宽高包括margin，border，padding）；content-box（不包括上述）
+  
   单位：em（相对于父元素font-size）；rem（相对于根元素font-size）；rpx（小程序相对单位，1rpx = 屏幕宽度 / 750 px）
+  
   选择器：#ID  .class
+  
   *水平垂直居中：
     1.flex布局：弹性布局
     父：
@@ -201,21 +211,73 @@
          2、包含浮动
          3、避免文字环绕
          
+  三栏布局
+  
+  LESS：CSS预处理语言，动态 css 语言，使得css样式灵活作用于 html 标签，提高样式代码的可维护性
+    less.js的作用就是编译 .less 文件，使它成为浏览器能读懂的 css 样式；
+    在引用less.js之前，需要一个less变量，声明编译less的环境参数，less变量的声明必须要在less.js的引用之前
+    变量计算，变量混合（继承，带参），嵌套，函数，条件判断，变量作用域，import
+
          
 # 浏览器
    输入url到展示页面过程发生了什么？
      1.域名解析：DNS协议通过域名查找IP地址，域名解析就是在DNS记录一条信息记录
      2.建立TCP连接：三次握手，目的：为了防止已失效的连接请求报文段突然又传送到了服务端，从而产生错误
-     3.发起http请求：请求报文由三部分组成：请求行，请求报头和请求正文
+     3.发起http请求：请求报文由三部分组成：请求行，请求报头和空白行+请求正文
      4.服务器响应http请求：响应报文由三部分组成：响应行，响应报头和响应报文
      5.浏览器渲染页面：dom树，css规则树，渲染树（重排和重绘），根据渲染树计算每个节点信息，绘制页面，JS解析（一个主线程+一个任务队列）
      6.断开连接：TCP四次挥手
      
+     
 # 性能优化
-  DOM节点太多:
+  DOM操作太多:
       1. 合并多次的DOM操作为单次的DOM操作
       2. 设置具有动画效果的DOM元素的position属性为fixed或absolute
       3. 使用事件托管方式绑定事件
+  
+      
   性能检测：
       1.Performance API：使用浏览器提供的 window.performance 对象
       2.Profile工具：用于测试页面脚本运行时系统内存和CPU资源占用情况的API
+      
+
+# 算法
+  遍历二叉树：前序遍历、中序遍历、后序遍历
+  
+  二分法查找：
+    function getIndex(arr,num){
+      var len = arr.length,
+          st  = 0,
+          end = len-1
+          while(st<=end){
+          var mid = Math.floor((st+end)/2)  //向下取整
+          if(num==arr[mid]){
+              return mid
+          }else if(num>arr[mid]){
+              st = mid+1
+          }else{
+              end = mid-1
+          }
+      }
+      return arr;
+    }
+    
+  冒泡排序：
+    function bubbleSort(arr) {
+      var len = arr.length;
+      for (var i = 0; i < len; i++) {
+          for (var j = 0; j < len - 1 - i; j++) {
+              if (arr[j] > arr[j+1]) {        //相邻元素两两对比
+                  var temp = arr[j+1];        //元素交换
+                  arr[j+1] = arr[j];
+                  arr[j] = temp;
+              }
+          }
+      }
+      return arr;
+    }
+    
+    
+    
+    
+    
