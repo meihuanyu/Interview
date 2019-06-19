@@ -118,7 +118,7 @@
 # Vue
   UTC时间格式转标准时间：安装moment.js
   
-  *生命周期（钩子）：初始化，运行中，销毁时
+  *生命周期（钩子）：创建前后（created），挂载前后（mounted），更新前后（updated），销毁前后（destroy）
   
   双向绑定原理：Vue内部通过Object.defineProperty方法属性拦截的方式，把data对象里每个数据的读写转化成getter/setter，当数据变化时通知视图更新
     ES中有两种属性: 数据属性和访问器属性,
