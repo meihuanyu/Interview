@@ -144,6 +144,12 @@
    
    父子传值：vuex，$emit
    
+   options请求：
+     是浏览器对复杂跨域请求的一种处理方式,在真正发送请求之前,会先进行一次预请求,就是我们刚刚说到的参数为OPTIONS的第一次请求,他的作用是用于试探性的服务器响应是否正确,即是否能接受真正的请求,如果在options请求之后获取到的响应是拒绝性质的,例如500等http状态,那么它就会停止第二次的真正请求的访问
+     产生原因： 1:请求的方法不是GET/HEAD/POST
+              2:POST请求的Content-Type并非application/x-www-form-urlencoded, multipart/form-data, 或text/plain
+              3:请求设置了自定义的header字段
+   
    
 # Vuex（Vue状态管理）
   核心：仓库store，包含着你的应用中大部分的状态 (state)。
@@ -279,5 +285,34 @@
     
     
     
-    
-    
+# 环境
+  前端代码多环境管理：process.env，在使用Vue Cli构建的项目中，需要将process.env 设置其他变量名进行使用
+    在 package.json 的 script 字段中作如下配置：
+    "scripts": {
+      "start": "cross-env BUILD_ENV=dev node build/dev-server.js",
+      "dev": "cross-env BUILD_ENV=dev  node build/dev-server.js",
+      "build": "cross-env BUILD_ENV=dev node build/build.js",
+      "buildDev": "cross-env BUILD_ENV=dev  node build/build.js",
+      "buildStag": "cross-env BUILD_ENV=stag  node build/build.js",
+      "buildProd": "cross-env BUILD_ENV=prod  node build/build.js",
+      "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+      "e2e": "node test/e2e/runner.js",
+      "test": "npm run unit && npm run e2e",
+      "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    },
+   需要在webpack.dev.conf.js 及 webpack.prod.conf.js 文件中：
+    webpack.dev.conf.js
+      new webpack.DefinePlugin({
+          'process.env': config.dev.env,
+          'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)//增加此行
+      })
+    webpack.prod.conf.js
+      new webpack.DefinePlugin({
+          'process.env': env,
+          'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
+      })
+   此时，可在前端JS文件中通过 process.env.BUILD_ENV 获得 package.json中的script获得对应值，进行其他操作，比如，引入不同环境的配置文件
+
+
+
+
