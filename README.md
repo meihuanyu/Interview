@@ -33,11 +33,17 @@
     call()接收的是参数列表，而apply()则接收参数数组。
     bind()是返回一个新函数，供以后调用，而apply()和call()是立即调用。
     
+  5个基本数据类型：String,Boolean,Number,Undefine,NULL
+  1个复杂数据类型：Object
+  3个引用数据类型：Array，Object，Function
+  
+  数组操作：filter();pop();shift();;push();unshift();splice();slice();join();find();concat();reverse();sort()
+  
   this：指向调用函数的对象
-    new绑定
-    显式绑定：apply/call；硬绑定bind，创建新函数，this指向函数的第一个参数
-    隐式绑定：XXX.fn()，存在绑定丢失问题
-    默认绑定
+    new绑定;
+    显式绑定：apply/call；硬绑定bind，创建新函数，this指向函数的第一个参数;
+    隐式绑定：XXX.fn()，存在绑定丢失问题;
+    默认绑定;
     *箭头函数没有自己的 this, 它的this继承于上一层代码块的this
     
   event-loop(事件循环)：主线程循环不断地从任务队列按顺序取任务执行
@@ -180,6 +186,7 @@
   盒模型：box-sizing: border-box（整个div宽高包括margin，border，padding）；content-box（不包括上述）
   
   单位：em（相对于父元素font-size）；rem（相对于根元素font-size）；rpx（小程序相对单位，1rpx = 屏幕宽度 / 750 px）
+  rem布局：通过js修改根元素的大小，达到整个页面的缩放。
   
   选择器：#ID  .class
   
@@ -204,10 +211,15 @@
     absolute + transform
     行内元素：display: inline-block; text-align: center;
     
+  溢出隐藏：overflow: hidden
+  
   CSS预处理器：变量 / 嵌套 / 自动前缀 / 条件语句 / 循环语句
   
-  rem布局：通过js修改根元素的大小，达到整个页面的缩放。
-  
+  LESS：CSS预处理语言，动态 css 语言，使得css样式灵活作用于 html 标签，提高样式代码的可维护性
+    less.js的作用就是编译 .less 文件，使它成为浏览器能读懂的 css 样式；
+    在引用less.js之前，需要一个less变量，声明编译less的环境参数，less变量的声明必须要在less.js的引用之前
+    变量计算，变量混合（继承，带参），嵌套，函数，条件判断，变量作用域，import
+    
   BFC(Block Fromatting Context)：块级格式上下文；是一个独立的布局环境，其中的元素布局是不受外界的影响
     创建条件：1、float的值不是none。
             2、position的值不是static或者relative。
@@ -219,11 +231,14 @@
          
   三栏布局
   
-  LESS：CSS预处理语言，动态 css 语言，使得css样式灵活作用于 html 标签，提高样式代码的可维护性
-    less.js的作用就是编译 .less 文件，使它成为浏览器能读懂的 css 样式；
-    在引用less.js之前，需要一个less变量，声明编译less的环境参数，less变量的声明必须要在less.js的引用之前
-    变量计算，变量混合（继承，带参），嵌套，函数，条件判断，变量作用域，import
-
+  position：
+    默认值static
+    absolute（绝对定位，层叠z-index）；
+    relative（相对定位，当对象定位在浏览器窗口外，显示滚动条）；
+    fixed（固定定位，相对于浏览器窗口）
+    
+  hack就是浏览器留的后门，方便对这一个版本的浏览器单独定义样式，
+         
          
 # 浏览器
    输入url到展示页面过程发生了什么？
@@ -240,12 +255,17 @@
       1. 合并多次的DOM操作为单次的DOM操作
       2. 设置具有动画效果的DOM元素的position属性为fixed或absolute
       3. 使用事件托管方式绑定事件
-  
       
   性能检测：
       1.Performance API：使用浏览器提供的 window.performance 对象
       2.Profile工具：用于测试页面脚本运行时系统内存和CPU资源占用情况的API
-      
+  
+  为什么利用多个域名来存储网站资源会更有效？
+      1.CDN，表示让用户从离自己最近的下载点下载资源。
+      2.突破服务器的带宽限制。
+      3.节约主域名的连接数，提升并发
+      4.更加安全，比如静态资源服务器上面，不能运行任何代码的。
+
 
 # 算法
   遍历二叉树：前序遍历、中序遍历、后序遍历
@@ -314,5 +334,48 @@
    此时，可在前端JS文件中通过 process.env.BUILD_ENV 获得 package.json中的script获得对应值，进行其他操作，比如，引入不同环境的配置文件
 
 
+# 正则表达
+  + 号：1次或多次
+  * 号：0次、或1次、或多次
+  ? 号：0次、或1次
+  \n ：换行
+  \f ：换页
+  \r ：回车
+  \s ：空白字符，包括空格，制表符，换页符等
+  .	匹配除换行符 \n 之外的任何单字符
+  $	匹配输入字符串的结尾位置
+  ^	匹配输入字符串的开始位置
+  \w	匹配字母、数字、下划线
+  \d	匹配一个数字字符。等价于 [0-9]。
+
+
+# 兼容问题
+  请列举IE6的一些Bug的解决办法。
+    双倍margin：浮动的方向设置的和marign方便不相同即可。
+    有链接的图片的边框：img{border:none}即可。
+    3px bug ：给容器设置display:inline-block即可。
+    overflow:hidden失效，用zoom:1;来解决。
+    
+  写出5条Firefox和IE的脚本兼容问题？
+    绑定监听：IE是attatchEvent()  、 firefox是addEventListener();
+    计算样式：IE是computedStyle、 firefox是getComputedSyle();
+    滚动事件：IE是MouseWheel、 firefox是onmousewheel
+    表单元素：IE是 document.forms(”formname”) ， firefox是document.forms["formname"]
+
+
+ # web安全（https://juejin.im/post/5cd6ad7a51882568d3670a8e）
+  前端的攻击方式：
+  1.XSS 攻击（跨站脚本攻击)是一种代码注入攻击：
+    转义/过滤
+    在服务端使用 HTTP的 Content-Security-Policy 头部来指定策略，或者在前端设置 meta 标签。
+    输入限制（长度及内容）
+  2.CSRF（Cross-site request forgery）跨站请求伪造
+    使用token
+    添加验证码
+    为Set-Cookie响应头新增Samesite属性
+  3.点击劫持：是指在一个Web页面中隐藏了一个透明的iframe，用外层假页面诱导用户点击
+  
+  安全扫描工具： Arachni（基于Ruby的开源）；Mozilla HTTP Observatory；w3af（基于Python）
+  
 
 
