@@ -120,7 +120,32 @@
              3.很多的移动设备（PDA 手机）无法完全显示框架，设备兼容性差
              4.增加服务器的http请求
 
+  判断数组的方法：
+    1.typeof(arr)：除了 array 和 null 判断为 object 外，其他的都可以正常判断
+    2.arr instanceof Array：检测对象的原型链是否指向构造函数的 prototype 对象（面向对象）
+    3.arr.constructor === Array：利用对象的 constructor 属性
+    4.Object.prototype.toString.call(o) === '[object Array]'：取得对象的一个内部属性[[Class]]，再配合call，我们可以取得任何对象的内部属性
+    5.Array.isArray(arr) ：IE8之前的版本不支持
+    
+  函数声明会覆盖变量声明，但不会覆盖变量赋值。
+  setTimeout 的第一个参数使用字符串而非函数的话，会引发内存泄漏。
+  innerHTML:从对象的起始位置到终止位置的全部内容,包括Html标签。
+  innerText:从起始位置到终止位置的内容, 但它去除Html标签
+  
+  ajax的流程：
+    1)客户端产生js的事件
+    2)创建XMLHttpRequest对象
+    3)对XMLHttpRequest进行配置
+    4)通过AJAX引擎发送异步请求
+    5)服务器端接收请求并且处理请求，返回html或者xml内容
+    6)XML调用一个callback()处理响应回来的内容
+    7)页面局部刷新
 
+  构造函数：
+    是一种特殊的方法、主要用来创建对象时初始化对象，总与new运算符一起使用，创建对象的语句中构造函数的函数名必须与类名完全相同。
+与普通函数相比只能由new关键字调用，构造函数是类的标示
+  
+  
 # Vue
   UTC时间格式转标准时间：安装moment.js
   
