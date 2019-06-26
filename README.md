@@ -129,8 +129,9 @@
     
   函数声明会覆盖变量声明，但不会覆盖变量赋值。
   setTimeout 的第一个参数使用字符串而非函数的话，会引发内存泄漏。
-  innerHTML:从对象的起始位置到终止位置的全部内容,包括Html标签。
-  innerText:从起始位置到终止位置的内容, 但它去除Html标签
+  innerHTML：从对象的起始位置到终止位置的全部内容,包括Html标签。
+  innerText：从起始位置到终止位置的内容, 但它去除Html标签。
+  $.map和$.each：map()操作数组和对象，返回新数组；each()操作 jquery 对象返回原来的数组
   
   ajax的流程：
     1)客户端产生js的事件
@@ -144,6 +145,12 @@
   构造函数：
     是一种特殊的方法、主要用来创建对象时初始化对象，总与new运算符一起使用，创建对象的语句中构造函数的函数名必须与类名完全相同。
 与普通函数相比只能由new关键字调用，构造函数是类的标示
+  
+  sessionStorage和localstroage与cookie：
+  1.cookie在浏览器和服务器间来回传递，另外两个只存在本地；
+  2.cookie不能超过4k，另两个5M；
+  3.cookie有效期是设置时间，sessionStorage是浏览器关闭时，localStorage是始终有效；
+  4.localStorage 和 cookie 在同源窗口共享，sessionStorage数据不共享
   
   
 # Vue
@@ -194,6 +201,16 @@
   3.Mutation: 每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数
   4.Action: 类似于 mutation，但Action 提交的是 mutation，而不是直接变更状态；可以包含任意异步操作。异步逻辑都应该封装到 action 里面
   5.Module: 将 store 分割成模块（module）防止臃肿。每个模块拥有自己的 state、mutation、action、getter
+  
+  全局注册组件：
+    main.js 中 Vue.component(组件名,{方法})
+    全局组件必须写在Vue实例创建之前，才在该根元素下面生效
+    模板里面第一级只能有一个标签
+    组件处于全局下不可以添加默认事件，要用全局的事件函数，必须父子通信
+  
+  注册组件的方法： Vue.compontent() 和 Vue.extend() 
+    Vue.compontent() 是 Vue.extend() 的亲民版，Vue.extend() 需要new一个实例，挂载到特定的元素上，但new 实例().$mount() 的 $mount()的参数可以为空，依然能生成实例，但不挂载到 dom 文档流中，生成的实例中有 $el 想插哪里插哪里（document.body.appendChild( 实例.$el）
+
   
   
 # Vue React 对比
