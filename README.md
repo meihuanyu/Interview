@@ -187,6 +187,18 @@
      产生原因： 1:请求的方法不是GET/HEAD/POST
               2:POST请求的Content-Type并非application/x-www-form-urlencoded, multipart/form-data, 或text/plain
               3:请求设置了自定义的header字段
+
+  全局注册组件：
+    main.js 中 Vue.component(组件名,{方法})
+    全局组件必须写在Vue实例创建之前，才在该根元素下面生效
+    模板里面第一级只能有一个标签
+    组件处于全局下不可以添加默认事件，要用全局的事件函数，必须父子通信
+  
+  注册组件的方法： Vue.compontent() 和 Vue.extend() 
+    Vue.compontent() 是 Vue.extend() 的亲民版，Vue.extend() 需要new一个实例，挂载到特定的元素上，但new 实例().$mount() 的 $mount()的参数可以为空，依然能生成实例，但不挂载到 dom 文档流中，生成的实例中有 $el 想插哪里插哪里（document.body.appendChild( 实例.$el）
+   
+   Vue.nextTick()：用于延迟执行一段代码，它接受2个参数（回调函数和执行回调函数的上下文环境），如果没有提供回调函数，那么将返回promise对象。
+   在Vue生命周期的 created() 进行的 DOM 操作一定要放在 Vue.nextTick() 的回调函数中
    
    
 # Vuex（Vue状态管理）
@@ -201,15 +213,6 @@
   3.Mutation: 每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数
   4.Action: 类似于 mutation，但Action 提交的是 mutation，而不是直接变更状态；可以包含任意异步操作。异步逻辑都应该封装到 action 里面
   5.Module: 将 store 分割成模块（module）防止臃肿。每个模块拥有自己的 state、mutation、action、getter
-  
-  全局注册组件：
-    main.js 中 Vue.component(组件名,{方法})
-    全局组件必须写在Vue实例创建之前，才在该根元素下面生效
-    模板里面第一级只能有一个标签
-    组件处于全局下不可以添加默认事件，要用全局的事件函数，必须父子通信
-  
-  注册组件的方法： Vue.compontent() 和 Vue.extend() 
-    Vue.compontent() 是 Vue.extend() 的亲民版，Vue.extend() 需要new一个实例，挂载到特定的元素上，但new 实例().$mount() 的 $mount()的参数可以为空，依然能生成实例，但不挂载到 dom 文档流中，生成的实例中有 $el 想插哪里插哪里（document.body.appendChild( 实例.$el）
 
   
   
@@ -420,4 +423,8 @@
   安全扫描工具： Arachni（基于Ruby的开源）；Mozilla HTTP Observatory；w3af（基于Python）
   
 
-
+# Webpack
+  require.context() ：三个参数
+    1.要搜索的文件夹目录
+    2.是否还应该搜索它的子目录（true/false）
+    3.以及一个匹配文件的正则表达式。
