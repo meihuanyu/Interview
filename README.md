@@ -423,8 +423,83 @@
   安全扫描工具： Arachni（基于Ruby的开源）；Mozilla HTTP Observatory；w3af（基于Python）
   
 
-# Webpack
+# Webpack（https://www.cnblogs.com/cangqinglang/p/8964460.html）
   require.context() ：三个参数
     1.要搜索的文件夹目录
     2.是否还应该搜索它的子目录（true/false）
     3.以及一个匹配文件的正则表达式。
+  
+  1.npm init（生成package.json）
+  2.npm i webpack webpack-cli -D（安装cli）
+  3.创建 webpack.config.js（配置webpack）
+    let path = require('path');
+    module.exports = {
+        entry: '',               // 入口文件
+        output: {
+           filename: 'bundle.js',      // 打包后的文件名称
+           path: path.resolve('dist')  // 打包后的目录，必须是绝对路径
+        },              // 出口文件
+        module: {},              // 处理对应模块
+        plugins: [],             // 对应的插件
+        devServer: {},           // 开发服务器配置
+        mode: 'development'      // 模式配置
+    }
+  4.修改 package.json 文件
+    "scripts": {
+        "dev": "webpack --mode development",
+        "build": "webpack --mode production"
+      },
+  5.配置 html 模板：npm i html-webpack-plugin -D
+      let HtmlWebpackPlugin = require('html-webpack-plugin');
+      plugins 中 ：
+          // 通过new一下这个类来使用插件
+          new HtmlWebpackPlugin({
+              // 用哪个html作为模板
+              // 在src目录下创建一个index.html页面当做模板来用
+              template: './src/index.html',
+              hash: true, // 会在打包好的bundle.js后面加上hash串
+          })
+  6.引入css文件：
+      npm i style-loader css-loader -D
+      // 引入less文件的话，也需要安装对应的loader
+      npm i less less-loader -D
+        module: {
+            rules: [
+                {
+                    test: /\.css$/,     // 解析css
+                    use: ['style-loader', 'css-loader'] // 从右向左解析
+                    /* 
+                        也可以这样写，这种方式方便写一些配置参数
+                        use: [
+                            {loader: 'style-loader'},
+                            {loader: 'css-loader'}
+                        ]
+                    */
+                }
+            ]
+        }
+   
+  拆分css的插件：
+    npm i extract-text-webpack-plugin@next -D
+    let ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+    plugins 中 new ExtractTextWebpackPlugin('css/style.css') 
+  
+   
+  多入口文件
+    module.exports = {
+        // 1.写成数组的方式就可以打出多入口文件，不过这里打包后的文件都合成了一个
+        // entry: ['./src/index.js', './src/login.js'],
+        // 2.真正实现多入口和多出口需要写成对象的方式
+        entry: {
+            index: './src/index.js',
+            login: './src/login.js'
+        },
+        output: {
+            // 1. filename: 'bundle.js',
+            // 2. [name]就可以将出口文件名和入口文件名一一对应
+            filename: '[name].js',      // 打包后会生成index.js和login.js文件
+            path: path.resolve('dist')
+        }
+    }
+
+    
