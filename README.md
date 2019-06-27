@@ -502,4 +502,45 @@
         }
     }
 
+   
+  # Echars（https://segmentfault.com/a/1190000015453413?utm_source=tag-newest）
+   如果你的需求是定制化比较少的，基本上绑定数据然后展示就行了，或者你对echarts还不是很熟悉的，那么vue-chart是一个不错的选择；
+   如果你的需求是定制化多的，比如需要特殊处理鼠标事件什么的，那么我会更倾向于直接使用echarts。
+   
+   样式 itemStyle:{}emphasis是鼠标 hover 时候的高亮样式
+   背景色，文本样式 :
+      setOption({
+        backgroundColor:'',
+        testStyle:{
+          color:''
+        }
+      })
+   移动端自适应：在 option 中设置 Media Query  
+      media: [ // 这里定义了 media query 的逐条规则。
+        {
+            query: {...},   // 这里写规则。
+            option: {       // 这里写此规则满足下的option。
+                legend: {...},
+                ...
+            }
+        },
+        {
+            query: {...},   // 第二个规则。
+            option: {       // 第二个规则对应的option。
+                legend: {...},
+                ...
+            }
+        },
+        {                   // 这条里没有写规则，表示『默认』，
+            option: {       // 即所有规则都不满足时，采纳这个option。
+                legend: {...},
+                ...
+            }
+        }
+    ]
     
+    
+    
+    
+      
+      
