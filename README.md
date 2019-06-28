@@ -283,8 +283,19 @@
     fixed（固定定位，相对于浏览器窗口）
     
   hack就是浏览器留的后门，方便对这一个版本的浏览器单独定义样式，
-         
-         
+  
+  css3:flex
+    1.排列方式及顺序 flex-direction: row | row-reverse | column | column-reverse。
+    2.不同版本浏览器 -webkit-flex/flex。
+    3.横轴对齐（栅格模式）justify-content: flex-start | flex-end | center | space-between | space-around。
+    4.纵轴对齐 align-items: flex-start | flex-end | center | baseline | stretch。
+    5.换行方式 flex-wrap: nowrap|wrap|wrap-reverse|initial|inherit。
+    6.flex-flow：	flex-direction 和 flex-wrap 的简写。
+    7.order：	设置弹性盒子的子元素排列顺序。
+    8.align-self：	在弹性子元素上使用。覆盖容器的 align-items 属性。
+    9.flex：	设置弹性盒子的子元素如何分配空间。
+       
+       
 # 浏览器
    输入url到展示页面过程发生了什么？
      1.域名解析：DNS协议通过域名查找IP地址，域名解析就是在DNS记录一条信息记录
