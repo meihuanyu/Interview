@@ -214,6 +214,24 @@
   4.Action: 类似于 mutation，但Action 提交的是 mutation，而不是直接变更状态；可以包含任意异步操作。异步逻辑都应该封装到 action 里面
   5.Module: 将 store 分割成模块（module）防止臃肿。每个模块拥有自己的 state、mutation、action、getter
 
+
+# vue-router 钩子函数
+  全局钩子：
+    beforeEach((to, from, next) =>{} )
+    afterEach
+  单个路由里面的钩子：
+    {
+      path: '/dashboard',
+      component: resolve => require(['../components/page/Dashboard.vue'], resolve),
+      meta: { title: '系统首页' },
+      beforeEnter: (to, from, next) => {},
+      beforeLeave: (to, from, next) => {}
+    }
+  组件路由:
+    beforeRouteEnter(to, from, next) {}
+    beforeRouteUpdate (to, from, next) {}
+    beforeRouteLeave(to, from, next) {}
+  
   
   
 # Vue React 对比
