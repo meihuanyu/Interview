@@ -45,6 +45,7 @@
 
 
 6.Array.find();//查找返回值
+  Array.findIndex()
   let result = [1,1,1,2,3].find(function(item){
       return item == 2;
   })
@@ -52,3 +53,9 @@
 
 
 7.Array.includes();//判断数组是否有某值
+
+8.Object.keys(arr)
+
+9.arr.values()
+
+10.arr.IndexOf('xxx')
