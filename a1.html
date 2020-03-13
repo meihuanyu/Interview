@@ -1,0 +1,40 @@
+<html>
+    <script>
+        //手写curry
+        function sum(a,b,c,d,e){
+            return a+b+c+d+e
+        }
+        function curry(fn){
+            const len = fn.length
+            let params = []
+            const cfn = function(){
+                params = params.concat(Array.from(arguments))
+                if(params.length >= len){
+                    const res = fn(...params)
+                    params = []
+                    return res
+                }else{
+                    return cfn
+                }
+            }
+            return  cfn
+        }
+        const csum = curry(sum)
+        csum(1,2)
+
+        // 手写bind
+
+        Function.prototype.MyCall = function(context) {
+            //context就是demo中的Person1
+            // 必须此时调用MyCall的函数是say方法，那么我们只需要在context上扩展一个say方法指向调用MyCall的say方法这样this
+            console.log(this)
+            context.say = this //Mycall里边的this就是我们虚拟的say方法
+            context.say()
+        }
+        
+        function a(){
+            console.log(this.x)
+        }
+        a.MyCall({x: "xxx"})
+    </script>
+</html>
